@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  title: Minha API
+  description: Documentação da API para o projeto.
+  version: 1.0.0
+servers:
+  - url: https://api.exemplo.com/v1
+    description: Servidor de Produção
+  - url: http://localhost:3000
+    description: Servidor Local
+
+paths:
+  /usuarios:
+    get:
+      summary: Lista todos os usuários
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    nome:
+                      type: string
+
+  /usuarios/{id}:
+    get:
+      summary: Retorna um usuário específico
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  nome:
+                    type: string
+        '404':
+          description: Usuário não encontrado
